@@ -3,7 +3,7 @@ import { StateContext, DispatchContext } from "./contexts";
 import { getOr } from "lodash/fp";
 
 interface IUseGlobalState {
-  getState: (path: string, defaultValue?: any) => GlobalState;
+  getState: (path?: string, defaultValue?: any) => GlobalState;
   setState: (path: string, value: any) => void;
   addStore: (name: string, value: any) => void;
 }
@@ -20,8 +20,8 @@ export const useGlobalState = (): IUseGlobalState => {
   const state = React.useContext(StateContext);
   const dispatch = useGlobalDispatch();
   return {
-    getState: (path: string, defaultValue: any = undefined): GlobalState =>
-      getOr(defaultValue, path, state),
+    getState: (path: string = "", defaultValue: any = undefined): GlobalState =>
+      path === "" ? state : getOr(defaultValue, path, state),
     setState: (path: string, value: any): void =>
       dispatch({
         type: "UPDATE_STATE",

@@ -9,10 +9,8 @@ export default () => {
   useEffect(() => console.log(`COUNt IS: ${null}`));
   return (
     <div>
-      {person.age}
-      {person.firstName}
-      <button onClick={() => setState("", { person: { age: person.age + 1 } })}>
-        BUTTON
+      <button onClick={() => setState("person.age", person.age + 1)}>
+        Increase Age Value
       </button>
     </div>
   );
